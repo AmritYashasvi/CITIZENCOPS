@@ -17,9 +17,9 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link'
 
 const drawerWidth = 240;
-const navItems = ['Login', 'Register', 'Home'];
+const navItems = ['Home', 'Lodge Complain', 'Your Complaints', 'View Stats', 'Logout'];
 
-function Navbar(props) {
+function NavbarLogin(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -72,19 +72,20 @@ function Navbar(props) {
                        CITIZENCOPS
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                        {/* {navItems.map((item) => (
-                            <Button key={item} sx={{ color: '#fff' }} >
-                                <Link href="/" sx={{ color: '#fff' }}>{item}</Link>
-                            </Button>
-                        ))} */}
-                        <Button key={navItems[2]} sx={{ color: '#fff' }} >
-                            <Link href="/home" sx={{ color: '#fff' }} >{navItems[2]}</Link>
-                        </Button>
                         <Button key={navItems[0]} sx={{ color: '#fff' }} >
-                            <Link href="/login" sx={{ color: '#fff' }} >{navItems[0]}</Link>
+                            <Link href="#" sx={{ color: '#fff' }} >{navItems[0]}</Link>
                         </Button>
                         <Button key={navItems[1]} sx={{ color: '#fff' }} >
-                            <Link href="/register" sx={{ color: '#fff' }}>{navItems[1]}</Link>
+                            <Link href="#" sx={{ color: '#fff' }} >{navItems[1]}</Link>
+                        </Button>
+                        <Button key={navItems[2]} sx={{ color: '#fff' }} >
+                            <Link href="#" sx={{ color: '#fff' }}>{navItems[2]}</Link>
+                        </Button>
+                        <Button key={navItems[3]} sx={{ color: '#fff' }} >
+                            <Link href="#" sx={{ color: '#fff' }}>{navItems[3]}</Link>
+                        </Button>
+                        <Button key={navItems[4]} sx={{ color: '#fff' }} >
+                            <Link href="#" sx={{ color: '#fff' }}>{navItems[4]}</Link>
                         </Button>
                     </Box>
                 </Toolbar>
@@ -111,7 +112,7 @@ function Navbar(props) {
     );
 }
 
-Navbar.propTypes = {
+NavbarLogin.propTypes = {
     /**
      * Injected by the documentation to work in an iframe.
      * You won't need it on your project.
@@ -119,4 +120,4 @@ Navbar.propTypes = {
     window: PropTypes.func,
 };
 
-export default Navbar;
+export default NavbarLogin;

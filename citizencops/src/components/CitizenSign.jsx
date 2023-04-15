@@ -63,6 +63,7 @@ export default function CitizenSign() {
               fullWidth
               id="aadhar"
               label="Aadhar"
+              type="number"
               name="aadhar"
               autoComplete="aadhar"
               autoFocus
@@ -77,10 +78,6 @@ export default function CitizenSign() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
@@ -90,13 +87,13 @@ export default function CitizenSign() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
+            <Grid item xs>
+                <Link href="/police-login" variant="body2">
+                  Police Sign In
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
