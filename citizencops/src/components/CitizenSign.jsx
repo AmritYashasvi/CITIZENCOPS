@@ -12,6 +12,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 function Copyright(props) {
   return (
@@ -29,14 +32,46 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function CitizenSign() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+
+  const [loginData, setLoginData] = React.useState({
+    aadhar: "",
+    password: ""
+  })
+
+  function onchange(eve) {
+    const name = eve.target.name;
+    const value = eve.target.value;
+    setLoginData((prev) => {
+        return {...prev, [name]: value};
     });
+}
+
+
+
+async function handleClick(event) {
+  event.preventDefault();
+
+  console.log(loginData);
+  
+  const configuration = await {
+    method: "post",
+    url: "http://localhost:3004/login",
+    data: loginData,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
   };
+
+  axios(configuration).then((result) => {
+    cookies.set("TOKEN", result.data.token, {
+      path: "/",
+    });
+    alert("success");
+  }).catch((err) => {
+    console.log(err);
+  });
+}
+
 
   return (
     <ThemeProvider theme={theme} class="justify-content-center">
@@ -56,7 +91,7 @@ export default function CitizenSign() {
           <Typography component="h1" variant="h5">
             Citizen Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleClick} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -65,7 +100,10 @@ export default function CitizenSign() {
               label="Aadhar"
               name="aadhar"
               autoComplete="aadhar"
+              type='number'
               autoFocus
+              value={loginData.aadhar}
+              onChange={onchange}
             />
             <TextField
               margin="normal"
@@ -76,6 +114,8 @@ export default function CitizenSign() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={loginData.password}
+              onChange={onchange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -86,6 +126,7 @@ export default function CitizenSign() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleClick}
             >
               Sign In
             </Button>

@@ -83,7 +83,7 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    User.findOne({username: req.body.username}).then((user) => {
+    User.findOne({aadhar: req.body.aadhar}).then((user) => {
         bcrypt.compare(req.body.password, user.password).then((passwordCheck) => {
             if(!passwordCheck)
             {
@@ -95,9 +95,9 @@ app.post("/login", (req, res) => {
             const token = jwt.sign(
                 {
                   userId: user._id,
-                  userUsername: user.username,
+                  userUsername: user.aadhar,
                 },
-                "RANDOM-TOKEN",
+                process.env.TOKEN,
                 { expiresIn: "24h" }
             );
             res.status(200).send({
@@ -113,7 +113,7 @@ app.post("/login", (req, res) => {
         });
     }).catch((e) => {
         res.status(404).send({
-            message: "Email not found",
+            message: "Username not found",
             e
         });
     })

@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import axios from "axios";
 
 function Copyright(props) {
   return (
@@ -60,9 +61,27 @@ export default function Register() {
 
 
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     console.log(regData);
+
+    const configuration = await {
+      method: "post",
+      url: "http://localhost:3004/register",
+      data: regData,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    };
+
+    axios(configuration).then((result) => {
+      console.log(result);
+    }).catch((err) => {
+      console.log(err);
+    });
+
+    alert("submitted");
+
   };
 
   return (
@@ -178,7 +197,7 @@ export default function Register() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
