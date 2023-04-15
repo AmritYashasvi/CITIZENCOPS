@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Register from "./Register";
-import CitizenSign from "./CitizenSign";
 import Navbar from "./Navbar";
 import { Routes, Route } from "react-router-dom";
 import PoliceSign from "./PoliceSign";
@@ -37,7 +36,6 @@ function App() {
       </Routes>
       <Footer />
     </>
-
     
 
   );
