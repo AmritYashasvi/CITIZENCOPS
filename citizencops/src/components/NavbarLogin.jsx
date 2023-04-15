@@ -73,7 +73,7 @@ function NavbarLogin(props) {
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         <Button key={navItems[0]} sx={{ color: '#fff' }} >
-                            <Link href="#" sx={{ color: '#fff' }} >{navItems[0]}</Link>
+                            <Link href="/" sx={{ color: '#fff' }} >{navItems[0]}</Link>
                         </Button>
                         <Button key={navItems[1]} sx={{ color: '#fff' }} >
                             <Link href="#" sx={{ color: '#fff' }} >{navItems[1]}</Link>
@@ -85,7 +85,7 @@ function NavbarLogin(props) {
                             <Link href="#" sx={{ color: '#fff' }}>{navItems[3]}</Link>
                         </Button>
                         <Button key={navItems[4]} sx={{ color: '#fff' }} >
-                            <Link href="#" sx={{ color: '#fff' }}>{navItems[4]}</Link>
+                            <Link href="/" sx={{ color: '#fff' }}>{navItems[4]}</Link>
                         </Button>
                     </Box>
                 </Toolbar>
