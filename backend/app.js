@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dbConnect = require("./db/dbConnect");
 const User = require("./db/userModel");
+const Complain = require("./db/complainSchema");
 const auth = require("./auth");
 
 const saltRound = 10;
@@ -117,7 +118,49 @@ app.post("/login", (req, res) => {
             e
         });
     })
-})
+});
+
+
+
+app.post("/lodge-complain", auth, (req, res) => {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+    if(dd<10) 
+    {
+        dd='0'+dd;
+    } 
+    if(mm<10) 
+    {
+        mm='0'+mm;
+    } 
+    today = yyyy+'-'+mm+'-'+dd;
+
+    const complain = new Complain({
+        citizenid: req.user.userId,
+        type: req.body.type,
+        date: today,
+        subject: req.body.subject,
+        description: req.body.description,
+        flag: false
+    });
+    complain.save()
+        .then((result) => {
+            res.status(201).send({
+                message: "Complain Created Successfully",
+                result,
+            });
+        })
+        .catch((error) => {
+            res.status(500).send({
+                message: "Error creating complain",
+                error,
+            });
+        });
+        console.log("Complain added");
+
+});
 
 
 
