@@ -64,6 +64,7 @@ export default function PoliceSign() {
               id="policeid"
               label="Police ID"
               name="policeid"
+              type="number"
               autoComplete="policeid"
               autoFocus
             />
@@ -77,10 +78,6 @@ export default function PoliceSign() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
@@ -90,14 +87,9 @@ export default function PoliceSign() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+            <Grid item xs>
+                <Link href="/login" variant="body2">
+                  Citizen Sign In
                 </Link>
               </Grid>
             </Grid>

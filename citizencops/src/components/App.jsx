@@ -3,6 +3,11 @@ import Register from "./Register";
 import CitizenSign from "./CitizenSign";
 import Navbar from "./Navbar";
 import { Routes, Route } from "react-router-dom";
+import CitizenSign from "./CitizenSign";
+import PoliceSign from "./PoliceSign";
+import Footer from "./Footer";
+import Home from "./home";
+import NavbarLogin from "./NavbarLogin";
 
 function App() {
   return (
@@ -17,6 +22,9 @@ function App() {
         <Route path="/viewstats" element={<h1>stats</h1>} />
       </Routes>
     </>
+
+    
+
   );
 }
 

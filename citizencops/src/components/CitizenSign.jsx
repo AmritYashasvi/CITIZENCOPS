@@ -98,9 +98,9 @@ async function handleClick(event) {
               fullWidth
               id="aadhar"
               label="Aadhar"
+              type="number"
               name="aadhar"
               autoComplete="aadhar"
-              type='number'
               autoFocus
               value={loginData.aadhar}
               onChange={onchange}
@@ -117,10 +117,6 @@ async function handleClick(event) {
               value={loginData.password}
               onChange={onchange}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
@@ -131,13 +127,13 @@ async function handleClick(event) {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
+            <Grid item xs>
+                <Link href="/police-login" variant="body2">
+                  Police Sign In
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
