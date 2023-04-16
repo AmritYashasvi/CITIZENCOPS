@@ -26,6 +26,7 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 import axios from "axios";
 import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from 'recharts';
+import useState from 'react-usestateref'
 
 function preventDefault(event) {
     event.preventDefault();
@@ -36,7 +37,14 @@ const theme = createTheme();
 export default function Statistics(eve){
 
     const [city, setcity] = React.useState("");
-    const [piedata, setpiedata] = React.useState([]);
+    const [piedata, setpiedata, piedataRef] = useState([]);
+
+
+
+  
+
+
+
 
     function handleChange(eve) {
       const cityy = eve.target.value;
@@ -59,12 +67,12 @@ export default function Statistics(eve){
       axios(configuration)
         .then((result) => {
           setRows(result.data.result);
-          setMessage(result.data.message);
+          // setMessage(result.data.message);
           console.log("1");
         })
         .catch((error) => {
-          error = new Error();
-          console.log("0");
+          // error = new Error();
+          console.log(error);
         });
 
         console.log(rows);
@@ -159,7 +167,7 @@ export default function Statistics(eve){
       <Pie
         dataKey="value"
         isAnimationActive={false}
-        data={piedata}
+        data={piedataRef.current}
         cx={200}
         cy={200}
         outerRadius={80}
@@ -179,7 +187,7 @@ export default function Statistics(eve){
         </TableHead>
         <TableBody>
           {rows.map((rows) => (
-            <TableRow key={rows.id}>
+            <TableRow key={rows._id}>
               <TableCell>{rows.date}</TableCell>
               <TableCell>{rows.type}</TableCell>
               <TableCell>{rows.subject}</TableCell>

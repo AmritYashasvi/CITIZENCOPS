@@ -6,7 +6,7 @@ import { ProtectedRoutes } from "./ProtectedRoutes"
 import { ProtectedRoutes2 } from "./ProtectedRoutes2";
 import PoliceSign from "./PoliceSign";
 import Footer from "./Footer";
-import Home from "./home";
+import Home from "./Home";
 import NavbarLogin from "./NavbarLogin";
 import CitizenSign from "./CitizenSign";
 import LodgeComplaint from "./LogdeComplaint";
