@@ -11,6 +11,7 @@ import CitizenSign from "./CitizenSign";
 import LodgeComplaint from "./LogdeComplaint";
 import ComplaintComponent from "./ComplaintComponent";
 import NavbarPoliceLogin from "./NavbarPoliceLogin";
+import Solved from "./Solved";
 
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
