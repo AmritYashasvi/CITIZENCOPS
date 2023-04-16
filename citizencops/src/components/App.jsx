@@ -9,8 +9,11 @@ import Home from "./home";
 import NavbarLogin from "./NavbarLogin";
 import CitizenSign from "./CitizenSign";
 import LodgeComplaint from "./LogdeComplaint";
+import ComplaintComponent from "./ComplaintComponent";
+
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
+
 
 function App() {
   var nvbr = <Navbar />;
@@ -27,6 +30,7 @@ function App() {
   })
 
   return (
+
     <>
       {nvbr}
       <Routes>
@@ -40,6 +44,7 @@ function App() {
           <Route path="/viewstats" element={<h1>stats</h1>} />
         </Route>
       </Routes>
+
       <Footer />
     </>
     
