@@ -9,8 +9,14 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import IconButton from "@material-ui/core/IconButton";
+import InputLabel from "@material-ui/core/InputLabel";
+import Visibility from "@material-ui/icons/Visibility";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Input from "@material-ui/core/Input";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { FormControl, Select, MenuItem } from '@mui/material';
 import axios from "axios";
 
 function Copyright(props) {
@@ -62,6 +68,7 @@ export default function Register() {
 
 
   async function handleSubmit(event) {
+
     event.preventDefault();
     console.log(regData);
 
@@ -76,11 +83,13 @@ export default function Register() {
 
     axios(configuration).then((result) => {
       console.log(result);
+      alert("submitted");
+      window.location.href = "/login"
+
     }).catch((err) => {
       console.log(err);
+      alert("Failed to Submit")
     });
-
-    alert("submitted");
 
   };
 

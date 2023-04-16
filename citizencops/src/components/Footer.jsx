@@ -3,16 +3,23 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import { withStyles } from "@material-ui/core/styles";
+
+const WhiteTextTypography = withStyles({
+    root: {
+      color: "#FFFFFF"
+    }
+  })(Typography);
 
 export default function GuestFooter() {
   return (
     <Paper
       sx={{
-        // marginTop: 'calc(10% + 60px)',
+        marginTop: 'calc(10% + 60px)',
         width: '100%',
-        position: 'fixed',
+        position: '',
         bottom: 0,
-        backgroundColor: '#f2f2f2'
+        backgroundColor: 'black'
       }}
       component="footer"
       square
@@ -38,8 +45,12 @@ export default function GuestFooter() {
             mb: 2,
           }}
         >
-          <Typography variant="caption" color="initial">
-            <a href="/about-us" style={{ textDecoration: 'none', color: 'inherit' }}>About Us</a> | <a href="/contact-us" style={{ textDecoration: 'none', color: 'inherit' }}>Contact Us</a>
+          <Typography variant="caption" color="textPrimary">
+            <a href="/about-us" style={{ textDecoration: 'none', color: 'inherit' }}><WhiteTextTypography variant="caption">
+            About Us
+            </WhiteTextTypography></a> | <a href="/contact-us" style={{ textDecoration: 'none', color: 'inherit' }}><WhiteTextTypography variant="caption">
+            Contact Us
+            </WhiteTextTypography></a>
           </Typography>
         </Box>
 
@@ -52,7 +63,10 @@ export default function GuestFooter() {
           }}
         >
           <Typography variant="caption" color="initial">
-            Copyright ©2022. [] Limited
+          <WhiteTextTypography variant="caption">
+            Copyright ©2022. Limited 
+            </WhiteTextTypography>
+            
           </Typography>
         </Box>
       </Container>

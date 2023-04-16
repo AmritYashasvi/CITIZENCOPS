@@ -75,7 +75,7 @@ async function handleClick(event) {
 
 
   return (
-    <ThemeProvider theme={theme} class="justify-content-center">
+    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <Box
