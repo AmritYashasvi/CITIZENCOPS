@@ -39,7 +39,7 @@ export default function PoliceSign() {
   };
 
   return (
-    <ThemeProvider theme={theme} class="justify-content-center">
+    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <Box
