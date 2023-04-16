@@ -1,57 +1,61 @@
-import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
+import * as React from "react";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
 
-function Copyright() {
+export default function GuestFooter() {
   return (
-    <Typography variant="body2" color="text.secondary">
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-export default function Footer() {
-  return (
-    <Box
+    <Paper
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100vh',
+        // marginTop: 'calc(10% + 60px)',
+        width: '100%',
+        position: 'fixed',
+        bottom: 0,
+        backgroundColor: '#f2f2f2'
       }}
+      component="footer"
+      square
+      variant="outlined"
     >
-      
-      
-      <Box
-        component="footer"
-        sx={{
-          py: 8,
-          px: 4,
-          mt: 'auto',
-          backgroundColor: (theme) =>
-            theme.palette.mode === 'light'
-              ? theme.palette.grey[200]
-              : theme.palette.grey[800],
-        }}
-      >
-        
-          
-        <Container maxWidth="lg">
-          <Typography variant="body1">
+      <Container maxWidth="lg">
+        <Box
+          sx={{
+            flexGrow: 1,
+            justifyContent: "center",
+            display: "flex",
+            my: 1
+          }}
+        >
 
-           The information on this website is provided 'as is' without warranty of any kind ,express or implied.
-           A statement about the limitations of the information on the website and that the police department is not liable for any errors or omissions.
+        </Box>
+
+        <Box
+          sx={{
+            flexGrow: 1,
+            justifyContent: "center",
+            display: "flex",
+            mb: 2,
+          }}
+        >
+          <Typography variant="caption" color="initial">
+            <a href="/about-us" style={{ textDecoration: 'none', color: 'inherit' }}>About Us</a> | <a href="/contact-us" style={{ textDecoration: 'none', color: 'inherit' }}>Contact Us</a>
           </Typography>
-          <Copyright />
-        </Container>
-      </Box>
-    </Box>
+        </Box>
+
+        <Box
+          sx={{
+            flexGrow: 1,
+            justifyContent: "center",
+            display: "flex",
+            mb: 2,
+          }}
+        >
+          <Typography variant="caption" color="initial">
+            Copyright ©2022. [] Limited
+          </Typography>
+        </Box>
+      </Container>
+    </Paper>
   );
 }

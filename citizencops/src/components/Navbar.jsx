@@ -79,7 +79,7 @@ function Navbar(props) {
                         ))} */}
                         
                         <Button key={navItems[2]} sx={{ color: '#fff' }} >
-                            <Link href="/home" sx={{ color: '#fff' }} >{navItems[2]}</Link>
+                            <Link href="/" sx={{ color: '#fff' }} >{navItems[2]}</Link>
                         </Button>
                         <Button key={navItems[0]} sx={{ color: '#fff' }} >
                             <Link href="/login" sx={{ color: '#fff' }} >{navItems[0]}</Link>

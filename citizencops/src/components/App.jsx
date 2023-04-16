@@ -6,8 +6,13 @@ import PoliceSign from "./PoliceSign";
 import Footer from "./Footer";
 import Home from "./home";
 import NavbarLogin from "./NavbarLogin";
+
+import LodgeComplaint from "./LogdeComplaint";
+import ComplaintComponent from "./ComplaintComponent";
+
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
+
 
 function App() {
   var nvbr = <Navbar />;
@@ -24,6 +29,7 @@ function App() {
   })
 
   return (
+
     <>
       {nvbr}
       <Routes>
@@ -34,6 +40,7 @@ function App() {
         <Route path="/lodgecomplain" element={<h1>lodge complain</h1>} />
         <Route path="/viewstats" element={<h1>stats</h1>} />
       </Routes>
+
       <Footer />
     </>
     
