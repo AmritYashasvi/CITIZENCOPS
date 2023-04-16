@@ -9,7 +9,8 @@ const complainSchema = new mongoose.Schema(
         date: Date,
         subject: String,
         description: String,
-        flag: Boolean
+        flag: Boolean,
+        city: String
     }
 );
 

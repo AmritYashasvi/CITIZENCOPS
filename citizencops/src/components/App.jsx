@@ -34,13 +34,14 @@ function App() {
     <>
       {nvbr}
       <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<CitizenSign />} />
         <Route path="/police-login" element={<PoliceSign />} />
         <Route path="/register" element={<Register />} />
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/lodgecomplaint" element={<LodgeComplaint />} />
+          <Route path="/yourcomplaint" element={<ComplaintComponent />} />
           <Route path="/viewstats" element={<h1>stats</h1>} />
         </Route>
       </Routes>

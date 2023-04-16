@@ -5,34 +5,45 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
-// Generate Order Data
-function createData(date, type, subject, description, solved) {
-  return { date, type, subject, description, solved };
-}
 
-const rows = [
-  createData(
-    '12-02-2004',
-    'Murder',
-    'Thappad',
-    'Mujhe maara',
-    'Solved'
-  ),
-  createData(
-    '13-01-2007',
-    'Robbery',
-    'Loota',
-    'Mereko loot liya',
-    'Unsolved'
-  ),
-];
+
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
 export default function ComplaintComponent() {
+
+  const [rows, setRows] = React.useState([]);
+
+  React.useEffect(() => {
+    const token = cookies.get("TOKEN");
+
+    const configuration = {
+      method: "get",
+      url: "http://localhost:3004/user-complaint",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios(configuration)
+      .then((result) => {
+        setRows(result.data.result);
+        setMessage(result.data.message);
+      })
+      .catch((error) => {
+        error = new Error();
+      });
+  },[])
+
+
+
+
   return (
     <React.Fragment>
         <br></br>
@@ -57,7 +68,7 @@ export default function ComplaintComponent() {
               <TableCell>{rows.type}</TableCell>
               <TableCell>{rows.subject}</TableCell>
               <TableCell>{rows.description}</TableCell>
-              <TableCell>{rows.solved}</TableCell>
+              <TableCell>{rows.flag ? "solved" : "pending"}</TableCell>
               {/* <TableCell align="right">{`$${row.amount}`}</TableCell> */}
             </TableRow>
           ))}

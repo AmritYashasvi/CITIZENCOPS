@@ -137,16 +137,18 @@ app.post("/lodge-complain", auth, (req, res) => {
         mm='0'+mm;
     } 
     today = yyyy+'-'+mm+'-'+dd;
-
-    const complain = new Complain({
-        citizenid: req.user.userId,
-        type: req.body.type,
-        date: today,
-        subject: req.body.subject,
-        description: req.body.description,
-        flag: false
-    });
-    complain.save()
+    
+    User.findOne({_id: req.user.userId}).then((result) => {
+        const complain = new Complain({
+            citizenid: req.user.userId,
+            type: req.body.type,
+            date: today,
+            subject: req.body.subject,
+            description: req.body.description,
+            flag: false,
+            city: result.city
+        });
+        complain.save()
         .then((result) => {
             res.status(201).send({
                 message: "Complain Created Successfully",
@@ -159,6 +161,11 @@ app.post("/lodge-complain", auth, (req, res) => {
                 error,
             });
         });
+    }).catch((e) => {
+        console.log(e);
+    });
+    
+    
         console.log("Complain added");
 
 });
@@ -166,7 +173,6 @@ app.post("/lodge-complain", auth, (req, res) => {
 app.get("/user-complaint", auth, (req, res) => {
 
     Complain.find({citizenid: req.user.userId}).then((result) => {
-        console.log(result);
         res.status(200).send({message: "Success", result});
     }).catch((e) => {
         res.status(404).send({message: "request not found", e});
