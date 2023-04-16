@@ -5,15 +5,16 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dbConnect = require("./db/dbConnect");
 const User = require("./db/userModel");
-const Complain = require("./db/complainSchema");
+const Complain = require("./db/complainModel");
 const auth = require("./auth");
+var cors = require('cors');
 
 const saltRound = 10;
 
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
-
+app.use(cors());
 
 dbConnect();
 
@@ -160,6 +161,16 @@ app.post("/lodge-complain", auth, (req, res) => {
         });
         console.log("Complain added");
 
+});
+
+app.get("/user-complaint", auth, (req, res) => {
+
+    Complain.find({citizenid: req.user.userId}).then((result) => {
+        console.log(result);
+        res.status(200).send({message: "Success", result});
+    }).catch((e) => {
+        res.status(404).send({message: "request not found", e});
+    })
 });
 
 

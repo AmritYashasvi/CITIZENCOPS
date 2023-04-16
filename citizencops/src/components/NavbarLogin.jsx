@@ -14,7 +14,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link'
+import Link from '@mui/material/Link';
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const drawerWidth = 240;
 const navItems = ['Home', 'Lodge Complain', 'Your Complaints', 'View Stats', 'Logout'];
@@ -50,6 +52,12 @@ function NavbarLogin(props) {
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
+    async function logout() {
+        cookies.remove("TOKEN", { path: "/" });
+
+        window.location.href = "/";
+    }
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -84,7 +92,7 @@ function NavbarLogin(props) {
                         <Button key={navItems[3]} sx={{ color: '#fff' }} >
                             <Link href="#" sx={{ color: '#fff' }}>{navItems[3]}</Link>
                         </Button>
-                        <Button key={navItems[4]} sx={{ color: '#fff' }} >
+                        <Button key={navItems[4]} sx={{ color: '#fff' }} onClick={logout} >
                             <Link href="/" sx={{ color: '#fff' }}>{navItems[4]}</Link>
                         </Button>
                     </Box>

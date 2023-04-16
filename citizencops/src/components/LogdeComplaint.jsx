@@ -6,12 +6,13 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { FormControl, InputLabel, Select, MenuItem, TextareaAutosize } from '@mui/material';
 import axios from "axios";
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 function Copyright(props) {
   return (
@@ -38,7 +39,7 @@ const theme = createTheme();
 
 export default function Register() {
 
-    const [regData, setRegData] = React.useState({
+    const [complaintData, setComplaintData] = React.useState({
         subject: "",
         description: "",
         type: ""
@@ -47,7 +48,7 @@ export default function Register() {
   function onchange(eve) {
       const name = eve.target.name;
       const value = eve.target.value;
-      setRegData((prev) => {
+      setComplaintData((prev) => {
           return {...prev, [name]: value};
       });
   }
@@ -59,14 +60,15 @@ export default function Register() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log(regData);
-
+    console.log(complaintData);
+    const token = cookies.get("TOKEN");
     const configuration = await {
       method: "post",
-      url: "http://localhost:3004/register",
-      data: regData,
+      url: "http://localhost:3004/lodge-complain",
+      data: complaintData,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${token}`,
       }
     };
 
@@ -107,7 +109,7 @@ export default function Register() {
                   fullWidth
                   id="subject"
                   label="Subject"
-                  value={regData.subject}
+                  value={complaintData.subject}
                   onChange={onchange}
                   autoFocus
                 />
@@ -118,7 +120,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="description"
-                  value={regData.description}
+                  value={complaintData.description}
                   onChange={onchange}
                   minRows={4}
                   placeholder="Describe"
@@ -132,7 +134,7 @@ export default function Register() {
                         labelId="type"
                         id="type"
                         name="type"
-                        value={regData.type}
+                        value={complaintData.type}
                         label="Type"
                         onChange={onchange}
                     >

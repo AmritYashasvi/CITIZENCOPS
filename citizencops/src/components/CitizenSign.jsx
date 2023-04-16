@@ -67,6 +67,7 @@ async function handleClick(event) {
       path: "/",
     });
     alert("success");
+    window.location.href = "/";
   }).catch((err) => {
     console.log(err);
   });
