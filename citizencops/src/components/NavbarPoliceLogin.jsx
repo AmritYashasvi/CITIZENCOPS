@@ -53,10 +53,12 @@ function NavbarPoliceLogin(props) {
     const container = window !== undefined ? () => window().document.body : undefined;
 
     async function logout() {
-        cookies.remove("TOKEN", { path: "/" });
+        cookies.remove("POLICETOKEN", { path: "/" });
 
         window.location.href = "/";
     }
+
+    
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -84,13 +86,13 @@ function NavbarPoliceLogin(props) {
                             <Link href="/" sx={{ color: '#fff' }} >{navItems[0]}</Link>
                         </Button>
                         <Button key={navItems[1]} sx={{ color: '#fff' }} >
-                            <Link href="/lodgecomplaint" sx={{ color: '#fff' }} >{navItems[1]}</Link>
+                            <Link href="/pending" sx={{ color: '#fff' }} >{navItems[1]}</Link>
                         </Button>
                         <Button key={navItems[2]} sx={{ color: '#fff' }} >
-                            <Link href="/complaintlist" sx={{ color: '#fff' }}>{navItems[2]}</Link>
+                            <Link href="/solved" sx={{ color: '#fff' }}>{navItems[2]}</Link>
                         </Button>
-                        <Button key={navItems[3]} sx={{ color: '#fff' }} >
-                            <Link href="/complaintlist" sx={{ color: '#fff' }}>{navItems[3]}</Link>
+                        <Button key={navItems[3]} sx={{ color: '#fff' }} onClick={logout} >
+                            <Link href="/" sx={{ color: '#fff' }}>{navItems[3]}</Link>
                         </Button>
                     </Box>
                 </Toolbar>

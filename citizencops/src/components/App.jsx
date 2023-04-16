@@ -26,7 +26,13 @@ function App() {
     }
     else
     {
-      nvbr = <Navbar />
+      const policetoken = cookies.get("POLICETOKEN")
+      if(policetoken)
+      {
+        nvbr = <NavbarPoliceLogin />
+      }
+      else
+        nvbr = <Navbar />
     }
   })
 

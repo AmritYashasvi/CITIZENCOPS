@@ -10,6 +10,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 function Copyright(props) {
   return (
@@ -50,7 +53,7 @@ async function handleClick(event) {
   const configuration = await {
     method: "post",
     url: "http://localhost:3004/police-login",
-    data: loginData,
+    data: data,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
