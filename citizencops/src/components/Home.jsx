@@ -30,7 +30,7 @@ const HomePage = () => {
                     textAlign: "center",
                 }}
             >
-                <h1>Welcome to My Site!</h1>
+                <h1>Welcome to Our Site!</h1>
                 <p>Here police and citizen make contact between them</p>
             </Box>
             <Box
