@@ -118,7 +118,6 @@ export default function Register() {
                 <TextareaAutosize
                   name="description"
                   required
-                  fullWidth
                   id="description"
                   value={complaintData.description}
                   onChange={onchange}
