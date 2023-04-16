@@ -20,11 +20,11 @@ export default function Solved() {
   const [rows, setRows] = React.useState([]);
 
   React.useEffect(() => {
-    const token = cookies.get("TOKEN");
+    const token = cookies.get("POLICETOKEN");
 
     const configuration = {
       method: "get",
-      url: "http://localhost:3004/user-complaint",
+      url: "http://localhost:3004/solved",
       headers: {
         Authorization: `Bearer ${token}`,
       },

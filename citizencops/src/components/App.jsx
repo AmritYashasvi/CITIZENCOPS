@@ -3,6 +3,7 @@ import Register from "./Register";
 import Navbar from "./Navbar";
 import { Routes, Route } from "react-router-dom";
 import { ProtectedRoutes } from "./ProtectedRoutes"
+import { ProtectedRoutes2 } from "./ProtectedRoutes2";
 import PoliceSign from "./PoliceSign";
 import Footer from "./Footer";
 import Home from "./home";
@@ -28,7 +29,7 @@ function App() {
     }
     else
     {
-      const policetoken = cookies.get("POLICETOKEN")
+      const policetoken = cookies.get("POLICETOKEN");
       if(policetoken)
       {
         nvbr = <NavbarPoliceLogin />
@@ -53,6 +54,12 @@ function App() {
           <Route path="/yourcomplaint" element={<ComplaintComponent />} />
           <Route path="/viewstats" element={<h1>stats</h1>} />
         </Route>
+
+        <Route element={<ProtectedRoutes2 />}>
+          <Route path="/pending" element={<Pending />} />
+          <Route path="/solved" element={<Solved />} />
+        </Route>
+
       </Routes>
 
       <Footer />

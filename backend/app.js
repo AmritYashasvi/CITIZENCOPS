@@ -8,6 +8,7 @@ const User = require("./db/userModel");
 const Complain = require("./db/complainModel");
 const Police = require("./db/policeModel");
 const auth = require("./auth");
+const policeauth = require("./policeauth")
 var cors = require('cors');
 
 const saltRound = 10;
@@ -254,6 +255,33 @@ app.post("/police-login", (req, res) => {
     })
 });
 
+
+
+app.get("/pending", policeauth, (req, res) => {
+
+    Complain.find({city: req.user.city, flag: false}).then((result) => {
+        res.status(200).send({message: "Success", result});
+    }).catch((e) => {
+        res.status(404).send({message: "request not found", e});
+    })
+});
+
+app.get("/solved", policeauth, (req, res) => {
+
+    Complain.find({city: req.user.city, flag: true}).then((result) => {
+        res.status(200).send({message: "Success", result});
+    }).catch((e) => {
+        res.status(404).send({message: "request not found", e});
+    })
+});
+
+app.patch("/update", policeauth, (req, res) => {
+    Complain.findOneAndUpdate({_id: req.body.cid}, {$set:{flag: true}}, {new: true}).then((result) => {
+        console.log("success");
+    }).catch((err) => {
+        console.log('error');
+    });
+})
 
 
 

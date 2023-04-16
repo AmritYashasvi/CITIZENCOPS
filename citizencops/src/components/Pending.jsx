@@ -4,6 +4,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { Button } from '@mui/material';
 import axios from "axios";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
@@ -20,11 +21,11 @@ export default function Pending() {
   const [rows, setRows] = React.useState([]);
 
   React.useEffect(() => {
-    const token = cookies.get("TOKEN");
+    const token = cookies.get("POLICETOKEN");
 
     const configuration = {
       method: "get",
-      url: "http://localhost:3004/user-complaint",
+      url: "http://localhost:3004/pending",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -38,8 +39,7 @@ export default function Pending() {
       .catch((error) => {
         error = new Error();
       });
-  },[])
-
+  });
 
 
 
@@ -60,13 +60,29 @@ export default function Pending() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((rows) => (
-            <TableRow key={rows.id}>
+          {rows.map((rows,idx) => (
+            <TableRow key={rows._id}>
               <TableCell>{rows.date}</TableCell>
               <TableCell>{rows.type}</TableCell>
               <TableCell>{rows.subject}</TableCell>
               <TableCell>{rows.description}</TableCell>
-              <TableCell><Button variant="contained">✔</Button></TableCell>
+              <TableCell><Button variant="contained" onClick={(e)=>{
+                
+                const token = cookies.get("POLICETOKEN");
+
+                const configuration = {
+                  method: "patch",
+                  url: "http://localhost:3004/update",
+                  data: {cid: rows._id},
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                  },
+                };
+
+                axios(configuration);
+                location.reload();
+              }}>✔</Button></TableCell>
             </TableRow>
           ))}
         </TableBody>
