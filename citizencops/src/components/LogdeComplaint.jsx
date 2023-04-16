@@ -41,7 +41,7 @@ export default function Register() {
     const [regData, setRegData] = React.useState({
         subject: "",
         description: "",
-        type: ""
+        type: "Others"
   })
 
   function onchange(eve) {
@@ -139,6 +139,7 @@ export default function Register() {
                         <MenuItem value="Murder">Murder</MenuItem>
                         <MenuItem value="Robbery">Robbery</MenuItem>
                         <MenuItem value="Accident">Accident</MenuItem>
+                        <MenuItem value="Domestic-Violence">Domestic Violence</MenuItem>
                         <MenuItem value="Others">Others</MenuItem>
                     </Select>
                 </FormControl>

@@ -8,20 +8,24 @@ import Footer from "./Footer";
 import Home from "./home";
 import NavbarLogin from "./NavbarLogin";
 import LodgeComplaint from "./LogdeComplaint";
+import ComplaintComponent from "./ComplaintComponent";
 
 function App() {
   return (
     <div>
-      <Navbar />
-      {/* <NavbarLogin /> */}
-      {/* <Home />
+      {/* <Navbar /> */}
+      <NavbarLogin />
+      {/* <Complaint /> */}
+      {/* <Home /> */}
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<CitizenSign />} />
         <Route path="/police-login" element={<PoliceSign />} />
-      </Routes> */}
-      <LodgeComplaint />
+        <Route path="/lodgecomplaint" element={<LodgeComplaint />} />
+        <Route path="/complaintlist" element={<ComplaintComponent />} />
+      </Routes>
+      {/* <LodgeComplaint /> */}
       <Footer />
     </div>
     
