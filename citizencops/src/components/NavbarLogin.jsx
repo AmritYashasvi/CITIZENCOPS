@@ -90,7 +90,7 @@ function NavbarLogin(props) {
                             <Link href="/yourcomplaint" sx={{ color: '#fff' }}>{navItems[2]}</Link>
                         </Button>
                         <Button key={navItems[3]} sx={{ color: '#fff' }} >
-                            <Link href="#" sx={{ color: '#fff' }}>{navItems[3]}</Link>
+                            <Link href="/viewstats" sx={{ color: '#fff' }}>{navItems[3]}</Link>
                         </Button>
                         <Button key={navItems[4]} sx={{ color: '#fff' }} onClick={logout} >
                             <Link href="/" sx={{ color: '#fff' }}>{navItems[4]}</Link>

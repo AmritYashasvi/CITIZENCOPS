@@ -272,7 +272,7 @@ app.get("/solved", policeauth, (req, res) => {
         res.status(200).send({message: "Success", result});
     }).catch((e) => {
         res.status(404).send({message: "request not found", e});
-    })
+    });
 });
 
 app.patch("/update", policeauth, (req, res) => {
@@ -280,6 +280,16 @@ app.patch("/update", policeauth, (req, res) => {
         console.log("success");
     }).catch((err) => {
         console.log('error');
+    });
+});
+
+
+app.get("/:city", auth, (req, res) => {
+    const city = req.params.city;
+    Complain.find({city: city, flag: true}).then((result) => {
+        res.status(200).send({message: "Success", result});
+    }).catch((e) => {
+        res.status(404).send({message: "request not found", e});
     });
 })
 

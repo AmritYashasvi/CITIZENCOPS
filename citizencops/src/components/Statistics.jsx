@@ -22,6 +22,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { FormControl, Select, MenuItem } from '@mui/material';
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+import axios from "axios";
+import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 
 function preventDefault(event) {
     event.preventDefault();
@@ -29,27 +33,82 @@ function preventDefault(event) {
 
 const theme = createTheme();
 
-export default function Statistics(){
+export default function Statistics(eve){
+
+    const [city, setcity] = React.useState("");
+    const [piedata, setpiedata] = React.useState([]);
+
+    function handleChange(eve) {
+      const cityy = eve.target.value;
+      setcity(cityy);
+    }
 
     const [rows, setRows] = React.useState([]);
+    
+    function handleSubmit(eve) {
+      eve.preventDefault();
+      const token = cookies.get("TOKEN");
+      const configuration = {
+        method: "get",
+        url: "http://localhost:3004/" + city,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      
+      axios(configuration)
+        .then((result) => {
+          setRows(result.data.result);
+          setMessage(result.data.message);
+          console.log("1");
+        })
+        .catch((error) => {
+          error = new Error();
+          console.log("0");
+        });
 
-    // const configuration = {
-    //     method: "get",
-    //     url: "http://localhost:3004/user-complaint",
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   };
-  
-    //   axios(configuration)
-    //     .then((result) => {
-    //       setRows(result.data.result);
-    //       setMessage(result.data.message);
-    //     })
-    //     .catch((error) => {
-    //       error = new Error();
-    //     });
-    // },[])
+        console.log(rows);
+        // Murder, Robbery, Accident, Domestic-Violence, Others
+        setpiedata(() => {
+          var temp = [];
+          var Murder = 0, Robbery = 0, Accident = 0, Domestic_Violence = 0, Others = 0;
+          for(var i = 0; i < rows.length; i ++)
+          {
+            if(rows[i].type === 'Murder')
+              Murder ++;
+            else if(rows[i].type === 'Robbery')
+              Robbery ++;
+            else if(rows[i].type === 'Accident')
+             Accident ++;
+            else if(rows[i].type === 'Domestic-Violence')
+              Domestic_Violence ++;
+            else if(rows[i].type === 'Others')
+              Others ++;
+          }
+          temp = [
+            {
+              name: 'Murder', value: Murder
+            },
+            {
+              name: 'Robbery', value: Robbery
+            },
+            {
+              name: 'Accident', value: Accident
+            },
+            {
+              name: 'Domestic-Violence', value: Domestic_Violence
+            },
+            {
+              name: 'Others', value: Others
+            }
+          ];
+          console.log(temp);
+          return temp;
+        })
+
+    }
+
+    
 
     return (
         <ThemeProvider theme={theme}>
@@ -73,27 +132,42 @@ export default function Statistics(){
                         id="city"
                         name="city"
                         label="City"
-                        onChange={onchange}
+                        value={city}
+                        onChange={handleChange}
                     >
                         <MenuItem value="Ranchi">Ranchi</MenuItem>
                         <MenuItem value="Bokaro">Bokaro</MenuItem>
                         <MenuItem value="Girdih">Giridih</MenuItem>
                     </Select>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 3, mb: 2 }}
+                      onClick={handleSubmit}
+                    >
+                      Submit
+                    </Button>
                 </FormControl>
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Submit
-            </Button>
+            
           </Box>
         </Box>
       </Container>
-      <br></br>
+      <PieChart width={1000} height={400}>
+      <Pie
+        dataKey="value"
+        isAnimationActive={false}
+        data={piedata}
+        cx={200}
+        cy={200}
+        outerRadius={80}
+        fill="#8884d8"
+        label
+      />
+      <Tooltip />
+    </PieChart>
       <Table size="small">
         <TableHead>
           <TableRow>

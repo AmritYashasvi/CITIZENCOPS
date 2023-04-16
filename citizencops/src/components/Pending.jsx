@@ -77,7 +77,6 @@ export default function Pending() {
                     'Content-Type': 'application/x-www-form-urlencoded'
                   },
                 };
-
                 axios(configuration);
                 location.reload();
               }}>✔</Button></TableCell>

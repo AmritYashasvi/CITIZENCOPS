@@ -55,7 +55,7 @@ function App() {
         <Route element={<ProtectedRoutes />}>
           <Route path="/lodgecomplaint" element={<LodgeComplaint />} />
           <Route path="/yourcomplaint" element={<ComplaintComponent />} />
-          <Route path="/viewstats" element={<h1>stats</h1>} />
+          <Route path="/viewstats" element={<Statistics />} />
         </Route>
 
         <Route element={<ProtectedRoutes2 />}>
