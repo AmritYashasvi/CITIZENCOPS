@@ -13,6 +13,8 @@ import ComplaintComponent from "./ComplaintComponent";
 import NavbarPoliceLogin from "./NavbarPoliceLogin";
 import Solved from "./Solved";
 import Pending from "./Pending";
+import ContactUs from "./ContactUs";
+import Statistics from "./Statistics";
 
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
@@ -47,6 +49,7 @@ function App() {
         <Route path="/login" element={<CitizenSign />} />
         <Route path="/police-login" element={<PoliceSign />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/contact-us" element={<ContactUs />} />
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/lodgecomplaint" element={<LodgeComplaint />} />
