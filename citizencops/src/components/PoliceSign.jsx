@@ -29,14 +29,45 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function PoliceSign() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+
+  const [data, setData] = React.useState({
+    username: "",
+    password: ""
+  })
+
+  function onchange(eve) {
+    const name = eve.target.name;
+    const value = eve.target.value;
+    setData((prev) => {
+        return {...prev, [name]: value};
     });
+}
+
+
+async function handleClick(event) {
+  event.preventDefault();
+
+  console.log(data);
+  
+  const configuration = await {
+    method: "post",
+    url: "http://localhost:3004/police-login",
+    data: loginData,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
   };
+
+  axios(configuration).then((result) => {
+    cookies.set("POLICETOKEN", result.data.token, {
+      path: "/",
+    });
+    alert("success");
+    window.location.href = "/";
+  }).catch((err) => {
+    console.log(err);
+  });
+}
 
   return (
     <ThemeProvider theme={theme}>
@@ -56,16 +87,18 @@ export default function PoliceSign() {
           <Typography component="h1" variant="h5">
             Police Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleClick} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="policeid"
-              label="Police ID"
-              name="policeid"
-              type="number"
-              autoComplete="policeid"
+              id="username"
+              label="Username"
+              name="username"
+              type="text"
+              autoComplete="username"
+              value={data.username}
+              onChange={onchange}
               autoFocus
             />
             <TextField
@@ -77,12 +110,15 @@ export default function PoliceSign() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={data.password}
+              onChange={onchange}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleClick}
             >
               Sign In
             </Button>

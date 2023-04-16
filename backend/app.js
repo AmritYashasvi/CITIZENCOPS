@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const dbConnect = require("./db/dbConnect");
 const User = require("./db/userModel");
 const Complain = require("./db/complainModel");
+const Police = require("./db/policeModel");
 const auth = require("./auth");
 var cors = require('cors');
 
@@ -178,6 +179,83 @@ app.get("/user-complaint", auth, (req, res) => {
         res.status(404).send({message: "request not found", e});
     })
 });
+
+app.post("/police-register", (req, res) => {
+
+
+    bcrypt.hash(req.body.password, saltRound)
+    .then((hashedPassword) => {
+        const police= new Police({
+            username: req.body.username,
+            city: req.body.city,
+            password: hashedPassword
+        });
+        console.log(police);
+        police.save()
+        .then((result) => {
+            res.status(201).send({
+                message: "User Created Successfully",
+                result,
+            });
+        })
+        .catch((error) => {
+            res.status(500).send({
+                message: "Error creating user",
+                error,
+            });
+        });
+        console.log("User added");
+    })
+    .catch((err) => {
+        res.status(500).send({
+            message: "Password was not hashed successfully",
+            err,
+        });
+        console.log("Unable to add the user");
+    });
+    
+});
+
+app.post("/police-login", (req, res) => {
+    Police.findOne({username: req.body.username}).then((police) => {
+        bcrypt.compare(req.body.password, police.password).then((passwordCheck) => {
+            if(!passwordCheck)
+            {
+                return res.status(400).send({
+                        message: "Passwords does not match"
+                    });
+            }
+            //creating token
+            const token = jwt.sign(
+                {
+                  policeId: police._id,
+                  username: police.username,
+                  city: police.city
+                },
+                process.env.POLICETOKEN,
+                { expiresIn: "24h" }
+            );
+            res.status(200).send({
+                message: "Login Successful",
+                username: police.username,
+                token
+            })
+            }).catch((err) => {
+                res.status(400).send({
+                    message: "Passwords does not match",
+                    err
+                });
+        });
+    }).catch((e) => {
+        res.status(404).send({
+            message: "Username not found",
+            e
+        });
+    })
+});
+
+
+
 
 
 
