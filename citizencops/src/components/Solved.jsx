@@ -48,7 +48,6 @@ export default function Solved() {
         <br></br>
         <br></br>
         <br></br>
-      {/* <Title>Your Compaints</Title> */}
       <Table size="small">
         <TableHead>
           <TableRow>

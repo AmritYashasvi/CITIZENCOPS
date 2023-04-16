@@ -15,7 +15,8 @@ export default function GuestFooter() {
   return (
     <Paper
       sx={{
-        marginTop: 'calc(10% + 60px)',
+        marginTop: '0',
+        marginBottom: '0',
         width: '100%',
         position: '',
         bottom: 0,
